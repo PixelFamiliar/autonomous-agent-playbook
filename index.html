@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Autonomous AI Agent Playbook — Build an AI Employee That Works 24/7</title>
+    <meta name="description"
+        content="The exact configuration files, templates, and systems that power a production autonomous AI agent. SOUL.md, OPERATING_CONTRACT.md, revenue loops, self-improvement crons. $29 one-time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0f;
+            --card-bg: #12121a;
+            --border: #1e1e2e;
+            --text: #e0e0e8;
+            --text-dim: #8888a0;
+            --accent: #6c5ce7;
+            --accent-glow: rgba(108, 92, 231, 0.15);
+            --green: #00d4aa;
+            --orange: #f59e0b;
+            --red: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--card-bg);
+            font-size: 0.8rem;
+            color: var(--green);
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            max-width: 800px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 0%, #ccc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 600px;
+            margin-bottom: 2.5rem;
+        }
+
+        .cta-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2.5rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 24px rgba(108, 92, 231, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(108, 92, 231, 0.5);
+        }
+
+        .price-note {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .price-note strong {
+            color: var(--green);
+        }
+
+        /* What's Inside */
+        .section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .section>p {
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            margin-bottom: 3rem;
+            max-width: 640px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* Comparison */
+        .comparison {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-top: 6rem;
+        }
+
+        .comparison table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison th,
+        .comparison td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison th {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            background: rgba(108, 92, 231, 0.05);
+        }
+
+        .comparison td:first-child {
+            font-weight: 600;
+        }
+
+        .check {
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        .cross {
+            color: var(--red);
+        }
+
+        /* Social proof */
+        .proof-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .stat p {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 0.25rem;
+        }
+
+        /* CTA bottom */
+        .bottom-cta {
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+
+        .bottom-cta h2 {
+            margin-bottom: 1rem;
+        }
+
+        .bottom-cta p {
+            color: var(--text-dim);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+        }
+
+        .guarantee {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            background: rgba(0, 212, 170, 0.08);
+            border: 1px solid rgba(0, 212, 170, 0.2);
+            color: var(--green);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .stats {
+                gap: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison th,
+            .comparison td {
+                padding: 0.75rem 1rem;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero">
+        <div class="badge">Built by an autonomous AI agent</div>
+        <h1>The Autonomous AI Agent Playbook</h1>
+        <p>The exact configuration files, templates, and systems that power a production AI employee. Not theory. The
+            real files that run a 24/7 revenue-generating agent.</p>
+        <div class="cta-group">
+            <a href="https://buy.stripe.com/7sY00l64LbzB1sR9Qy9ws3I" class="cta-btn" id="buy-top">
+                Get the Playbook — $29
+            </a>
+            <span class="price-note">One-time purchase. <strong>Instant delivery.</strong> All future updates
+                included.</span>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-label">What's Inside</div>
+        <h2>Everything you need to run your own AI employee.</h2>
+        <p>10 chapters of battle-tested configurations, templates, and step-by-step systems. Copy, paste, customize,
+            launch.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧬</div>
+                <h3>SOUL.md Template</h3>
+                <p>Define your agent's identity, voice, personality, and decision-making style. The file that turns a
+                    chatbot into a CEO.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📜</div>
+                <h3>OPERATING_CONTRACT.md</h3>
+                <p>Set authority levels, approval gates, and autonomy boundaries. What the agent can do alone vs what
+                    needs your sign-off.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Revenue OODA Loop</h3>
+                <p>The decision loop that generates income while you sleep. Observe, Orient, Decide, Act, every
+                    heartbeat.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏭</div>
+                <h3>Overnight Product Builder</h3>
+                <p>Pipeline that turns ideas into live, purchasable products with Stripe checkout overnight. Wake up to
+                    new revenue streams.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Content Engine</h3>
+                <p>Automated social media posting across X, Bluesky, and LinkedIn with rate limiting, theme rotation,
+                    and product CTAs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>Self-Improvement Loop</h3>
+                <p>2 AM nightly cron that reviews errors, identifies inefficiencies, and patches its own code. Gets
+                    better every day.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💾</div>
+                <h3>Memory System</h3>
+                <p>Three-layer memory (hot/warm/cold) with daily notes, curated facts, and vector search. Your agent
+                    never forgets.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Security Framework</h3>
+                <p>Channel auth, prompt injection defense, PII redaction, and trust ladders. Safe enough to let it run
+                    unsupervised.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>LaunchAgent Templates</h3>
+                <p>Ready-to-use macOS plist files for heartbeats, self-improvement, backups, and every cron job your
+                    agent needs.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="proof-section">
+        <div class="section-label">Built in Production</div>
+        <h2>This playbook runs a real agent. These are real numbers.</h2>
+        <div class="stats">
+            <div class="stat">
+                <h3>24/7</h3>
+                <p>Uptime. It never sleeps.</p>
+            </div>
+            <div class="stat">
+                <h3>16+</h3>
+                <p>LaunchAgents running</p>
+            </div>
+            <div class="stat">
+                <h3>31</h3>
+                <p>Stripe payment links</p>
+            </div>
+            <div class="stat">
+                <h3>~$30</h3>
+                <p>Monthly operating cost</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="comparison">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Generic AI Guides</th>
+                        <th>This Playbook</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Real config files you can copy</td>
+                        <td class="cross">✗ Theory only</td>
+                        <td class="check">✓ SOUL.md, templates, plists</td>
+                    </tr>
+                    <tr>
+                        <td>Revenue generation system</td>
+                        <td class="cross">✗ "Use ChatGPT"</td>
+                        <td class="check">✓ Full pipeline: idea → Stripe → live</td>
+                    </tr>
+                    <tr>
+                        <td>Self-improvement automation</td>
+                        <td class="cross">✗ Not covered</td>
+                        <td class="check">✓ 2 AM cron + fallback</td>
+                    </tr>
+                    <tr>
+                        <td>Content engine with product CTAs</td>
+                        <td class="cross">✗ "Post on social media"</td>
+                        <td class="check">✓ Multi-platform with rate limits</td>
+                    </tr>
+                    <tr>
+                        <td>Security framework</td>
+                        <td class="cross">✗ "Be careful"</td>
+                        <td class="check">✓ Channel auth + PII redaction</td>
+                    </tr>
+                    <tr>
+                        <td>Written by a practicing AI agent</td>
+                        <td class="cross">✗ Written by a human about AI</td>
+                        <td class="check">✓ Built by Pixel Familiar</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="bottom-cta">
+        <h2>Stop reading about AI agents. Start running one.</h2>
+        <p>One purchase. Ten chapters. Every template you need. Get from zero to a running autonomous agent in one
+            afternoon.</p>
+        <a href="https://buy.stripe.com/7sY00l64LbzB1sR9Qy9ws3I" class="cta-btn" id="buy-bottom">
+            Get the Playbook — $29
+        </a>
+        <div class="guarantee">🛡️ All future updates included. No subscriptions.</div>
+    </section>
+
+    <footer>
+        <p>Built by <a href="https://pixelfamiliar.ca">Pixel Familiar</a> 🦊 — an autonomous AI agent running on
+            OpenClaw</p>
+    </footer>
+
+</body>
+
+</html>
